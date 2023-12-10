@@ -1,0 +1,20 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block head %}
+    <title>Список фильмов</title>
+    <link href="{% static 'style.css' %}" rel="stylesheet">
+{% endblock head %}
+ {% block content %}
+    <div class="cont">
+        <h2>Каталог</h2>
+        <ul>
+            {% for one in kino_list %}
+                <li>
+                    <a href="{{ one.getAbsUrl }}"><b>{{ one.title }}</b></a>
+                    <p>{{ one.country }}, {{ one.year }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock content %}

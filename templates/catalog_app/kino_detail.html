@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Про фильм</title>
+</head>
+<body>
+    <h2>Фильм {{ kino.title }} </h2>
+    <p>Жанр: {{ kino.genre }}</p>
+    <p>Режисер: {{ kino.director }}</p>
+    <p>Страна: {{ kino.country }}</p>
+    <p>Год: {{ kino.year }}</p>
+    <p>Актеры: </p>
+        {% for one in kino.actor.all %}
+            <p>{{ one.name }} {{ one.lastname }}</p>
+        {% endfor %}
+    <p>Подписка: {{ kino.podpiska.level }}</p>
+</body>
+</html>

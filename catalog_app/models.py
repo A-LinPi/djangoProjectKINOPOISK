@@ -17,10 +17,13 @@ class Director(models.Model):
     data = models.DateField(verbose_name='Дата рождения', blank=True, null=True)
     filmcount = models.IntegerField(verbose_name='Всего фильмов', blank=True, null=True)
     best = models.TextField(max_length=200, verbose_name='лучшие фильмы', blank=True, null=True)
+    image = models.URLField(verbose_name='Фото', blank=True, null=True)
 
     def __str__(self):
         return self.lastname
 
+    def getAbsUrl(self):
+        return reverse('infodirector', args=[self.id])
 
 class Actor(models.Model):
     name = models.CharField(max_length=20, verbose_name='Имя')
@@ -29,6 +32,7 @@ class Actor(models.Model):
     data = models.DateField(verbose_name='Дата рождения', blank=True, null=True)
     filmcount = models.IntegerField(verbose_name='Всего фильмов', blank=True, null=True)
     best = models.TextField(max_length=200, verbose_name='лучшие фильмы', blank=True, null=True)
+    image = models.URLField(verbose_name='Фото', blank=True, null=True)
 
     def __str__(self):
         return self.lastname
@@ -59,9 +63,11 @@ class Kino(models.Model):
     podpiska = models.ForeignKey(Podpiska, on_delete=models.SET_NULL, null=True)
     image = models.URLField(verbose_name='Постер', blank=True)
     opisanie = models.TextField(max_length=500, verbose_name='Описание', blank=True)
+    trailer = models.URLField(verbose_name='Трейлер', blank=True, null=True)
 
     def __str__(self):
         return self.title
 
     def getAbsUrl(self):
         return reverse('info', args=[self.id])
+

@@ -22,5 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='home'),
     path('kino/all', views.kinolist.as_view(), name='allkino'),
-    path('kino/<int:pk>', views.kinodetail.as_view(), name='info')
+    path('kino/<int:pk>', views.kinodetail.as_view(), name='info'),
+    path('director/all', views.directorlist.as_view(), name='alldirector'),
+    path('director/<int:pk>', views.directordetail.as_view(), name='infodirector')
 ]

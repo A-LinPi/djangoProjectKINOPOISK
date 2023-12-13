@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views.generic import DetailView, ListView
 
 from catalog_app.models import *
 from django.views import generic
@@ -18,3 +19,11 @@ class kinolist(generic.ListView):
 
 class kinodetail(generic.DetailView):
     model = Kino
+
+
+class directorlist(generic.ListView):
+    model = Director
+
+
+class directordetail(generic.DetailView):
+    model = Director

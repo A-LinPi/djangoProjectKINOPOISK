@@ -1,0 +1,22 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block head %}
+    <title>Список режиссеров</title>
+    <link href="{% static 'style.css' %}" rel="stylesheet">
+{% endblock head %}
+ {% block content %}
+    <div class="cont">
+        <h2>Список режиссеров</h2>
+        <ul>
+            {% for one in director_list %}
+                <li>
+                    <a href="{{ one.getAbsUrl }}">
+                        <p>{{ one.name }}, {{ one.lastname }}</p>
+                        <img src="{{ one.image }}" alt="" width="150px">
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock content %}

@@ -1,0 +1,13 @@
+<head>
+    <meta charset="UTF-8">
+    <title>Про режиссера</title>
+</head>
+<body>
+    <h2>Режиссер: {{ director.name }} {{ director.lastname }}</h2>
+    <img src="{{ director.image }}" alt="" width="350px">
+    <p>Дата рождения: {{ director.data }}</p>
+    <p>Количество фильмов: {{ director.filmcount }}</p>
+    <p>Ссылка: <a href="{{ director.info }}">{{ director.info }}</a></p>
+    <p>Лучшие фильмы: {{ director.best}}</p>
+</body>
+</html>

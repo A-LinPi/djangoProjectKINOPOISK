@@ -6,10 +6,10 @@
     <meta charset="UTF-8">
     {% block head %}
     <title>Title</title>
-    <link href="{% static 'style.css' %}" rel="stylesheet">
+{#    <link href="{% static 'style.css' %}" rel="stylesheet">#}
     {% endblock head %}
 </head>
-<body>
+<body class="main-page-body">
     {% block menu %}
         <div class="menu">
             <a href="{% url 'home' %}">Главная</a>
@@ -17,6 +17,11 @@
             <a href="{% url 'alldirector' %}">Режиссеры</a>
             <a href="{% url 'allkino' %}">Фильмы</a>
             <a href="">Подписка</a>
+            {% if not user.username %}
+                <a href="{% url 'login' %}">LOGIN</a>
+            {% else %}
+                <a href="{% url 'logout' %}">LOGOUT</a>
+            {% endif %}
         </div>
     {% endblock menu %}
     {% block content %}

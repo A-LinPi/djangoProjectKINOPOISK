@@ -25,7 +25,10 @@ urlpatterns = [
     path('kino/<int:pk>', views.kinodetail.as_view(), name='info'),
     path('director/all', views.directorlist.as_view(), name='alldirector'),
     path('director/<int:pk>', views.directordetail.as_view(), name='infodirector'),
+    path('actor/all', views.actorlist.as_view(), name='allactor'),
+    path('actor/<int:pk>', views.actordetail.as_view(), name='infoactor'),
     path('user/', include('django.contrib.auth.urls')),
     path('accounts/profile/', views.index),
-    path('user/reg/', views.reg, name="registration")
+    path('user/reg/', views.reg, name="registration"),
+    path('accounts/login/', views.index)
 ]

@@ -1,0 +1,25 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block head %}
+    <title>Про актера</title>
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+    <link href="{% static 'css/actors.css' %}" rel="stylesheet">
+{% endblock head %}
+
+{% block content %}
+    <a class="back" href="{% url 'allactor' %}">Назад к актерам</a>
+    <div class="actor_details">
+        <img src="{{ actor.image }}" alt="" width="500px">
+        <div class="actor_info">
+            <h2>Актер: {{ actor.name }} {{ actor.lastname }}</h2>
+            <p>Дата рождения: {{ actor.data }}</p>
+            <p>Количество фильмов: {{ actor.filmcount }}</p>
+            <p>Ссылка: <a href="{{ actor.info}}">{{ actor.info }}</a></p>
+            <p>Лучшие фильмы: </p>
+            <pre>{{ actor.best}}</pre>
+        </div>
+
+    </div>
+
+{% endblock content %}

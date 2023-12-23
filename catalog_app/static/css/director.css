@@ -1,0 +1,40 @@
+.main-page-body {
+    background: linear-gradient( var(--dark-color) 40%, var(--purple-color));
+}
+
+.director_details,
+.actor_details {
+    width: 80vw;
+    display: flex;
+    justify-items: stretch;
+    margin: 20px;
+    border-radius: 20px;
+    padding: 20px;
+    color: white;
+}
+
+.director_details img,
+.actor_details img {
+    width: 431px;
+    height: 431px;
+    border-radius: 20px;
+    border: 1px solid #969696;
+    object-fit:cover;
+    flex-shrink: 0;
+}
+
+
+.director_info,
+.actor_info {
+    margin-left: 20px;
+}
+
+.back {
+    display: block;
+    margin: 16px 24px ;
+}
+
+pre {
+    font-size: 14px;
+    font-weight: 600;
+}

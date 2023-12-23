@@ -6,6 +6,11 @@ admin.site.register(Genre)
 admin.site.register(Country)
 
 
+@admin.register(ProfileUser)
+class adminProfileUser(admin.ModelAdmin):
+    list_display = ('user', 'podpiska')
+
+
 @admin.register(Actor)
 class adminActor(admin.ModelAdmin):
     list_display = ('name', 'lastname')

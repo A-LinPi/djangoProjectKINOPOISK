@@ -1,5 +1,7 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 
 
 # Create your models here.
@@ -24,6 +26,7 @@ class Director(models.Model):
 
     def getAbsUrl(self):
         return reverse('infodirector', args=[self.id])
+
 
 class Actor(models.Model):
     name = models.CharField(max_length=20, verbose_name='Имя')
@@ -71,3 +74,8 @@ class Kino(models.Model):
     def getAbsUrl(self):
         return reverse('info', args=[self.id])
 
+
+class ProfileUser(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    podpiska = models.ForeignKey(Podpiska, on_delete=models.SET_NULL, null=True)
+    balance = models.IntegerField(default=10)

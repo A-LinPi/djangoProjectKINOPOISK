@@ -2,17 +2,17 @@
 {% load static %}
 
 {% block head %}
-    <title>Список режиссеров</title>
-    <link href="{% static 'css/style1.css' %}" rel="stylesheet">
+    <title>Список актеров</title>
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
 {% endblock head %}
 
  {% block content %}
     <div class="inner_cont">
-        <h2>Список режиссеров</h2>
-        <ul class="directors">
-            {% for one in director_list %}
-                <li class="director_card">
-                    <a href="{{ one.getAbsUrl }}">
+        <h2>Список актеров</h2>
+        <ul class="actors">
+            {% for one in actor_list %}
+                <li class="actor_card">
+                    <a href="{{ one.id }}">
                         <img src="{{ one.image }}" alt="">
                         <p>{{ one.name }} {{ one.lastname }}</p>
                     </a>

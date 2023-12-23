@@ -49,6 +49,7 @@ def reg(request):
             newuser.first_name = K4
             newuser.last_name = K5
             newuser.save()
+            ProfileUser.objects.create(user_id=newuser, podpiska_id=1)
             login(request, newuser)
             return redirect('home')
     else:
@@ -56,3 +57,11 @@ def reg(request):
     data = {'forma': f}
     return render(request, "registration/registration.html", data)
     # return redirect('home')
+
+
+class actorlist(generic.ListView):
+    model = Actor
+
+
+class actordetail(generic.DetailView):
+    model = Actor

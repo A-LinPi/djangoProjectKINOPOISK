@@ -1,13 +1,25 @@
-<head>
-    <meta charset="UTF-8">
+{% extends 'index.html' %}
+{% load static %}
+
+{% block head %}
     <title>Про режиссера</title>
-</head>
-<body>
-    <h2>Режиссер: {{ director.name }} {{ director.lastname }}</h2>
-    <img src="{{ director.image }}" alt="" width="350px">
-    <p>Дата рождения: {{ director.data }}</p>
-    <p>Количество фильмов: {{ director.filmcount }}</p>
-    <p>Ссылка: <a href="{{ director.info }}">{{ director.info }}</a></p>
-    <p>Лучшие фильмы: {{ director.best}}</p>
-</body>
-</html>
+    <link href="{% static 'css/style1.css' %}" rel="stylesheet">
+    <link href="{% static 'css/director.css' %}" rel="stylesheet">
+{% endblock head %}
+
+{% block content %}
+    <a class="back" href="{% url 'alldirector' %}">Назад к режиссерам</a>
+    <div class="director_details">
+        <img src="{{ director.image }}" alt="" width="500px">
+        <div class="director_info">
+            <h2>Режиссер: {{ director.name }} {{ director.lastname }}</h2>
+            <p>Дата рождения: {{ director.data }}</p>
+            <p>Количество фильмов: {{ director.filmcount }}</p>
+            <p>Ссылка: <a href="{{ director.info }}">{{ director.info }}</a></p>
+            <p>Лучшие фильмы: </p>
+            <pre>{{ director.best}}</pre>
+        </div>
+
+    </div>
+
+{% endblock content %}

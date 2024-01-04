@@ -3,18 +3,44 @@
 
 {% block head %}
     <title>Список фильмов</title>
-    <link href="{% static 'style.css' %}" rel="stylesheet">
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+    <link href="{% static 'css/kino.css' %}" rel="stylesheet">
 {% endblock head %}
- {% block content %}
+
+{% block content %}
+
+    <h2>Каталог</h2>
     <div class="cont">
-        <h2>Каталог</h2>
-        <ul>
+        <ul class="films">
             {% for one in kino_list %}
                 <li>
-                    <a href="{{ one.getAbsUrl }}"><b>{{ one.title }}</b></a>
-                    <p>{{ one.country }}, {{ one.year }}</p>
+                    <img width="140" height="200"src="{{ one.image }}" alt="">
+                    <div>
+                        <a href="{{ one.getAbsUrl }}"><b>{{ one.title }}</b></a>
+                        <p>{{ one.country }}, {{ one.year }}</p>
+                        <p class="podpiska">{{ one.podpiska }}</p>
+                    </div>
                 </li>
             {% endfor %}
         </ul>
     </div>
+            {% if is_paginated %}
+            <div class="pagination">
+                <span class="step-links">
+                        {% if page_obj.has_previous %}
+                {#            <a href="?page=1">&laquo; first</a>#}
+                <a href="?page={{ page_obj.previous_page_number }}">пред</a>
+                        {% endif %}
+
+                        <span class="current">
+                            Стр {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.
+                </span>
+
+                        {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">след</a>
+                {#            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>#}
+                        {% endif %}
+                </span>
+            </div>
+        {% endif %}
 {% endblock content %}

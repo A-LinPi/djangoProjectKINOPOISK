@@ -23,7 +23,7 @@ body {
 	line-height: 1.6;
 	margin: 8px;
 	min-height: 100vh;
-
+	color: white;
 }
 
 
@@ -37,6 +37,7 @@ ul {
 .logo {
 	margin: 0;
 	font-size: 1.45em;
+	color: var(--dark-color);;
 }
 
 .logo span {
@@ -89,7 +90,7 @@ header {
 	/*background-color: lightgreen;*/
 	align-items: center;
   	justify-content: center;
-	text-align: center;
+	theight: 80vh;ext-align: center;
 	height: 80vh;
 }
 
@@ -140,6 +141,7 @@ a {
 	color: var(--light-purple-color);
 	text-decoration: none;
 }
+
 
 
 /* =================================

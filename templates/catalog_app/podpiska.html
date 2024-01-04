@@ -1,0 +1,48 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block head %}
+    <title>Личный кабинет</title>
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+    <link href="{% static 'css/podpiska2.css' %}" rel="stylesheet">
+    <link href="{% static 'css/btn.css' %}">
+{% endblock head %}
+{% block content %}
+    <div class="content">
+        {% if user.username %}
+            <h2>Это ваш личный кабинет</h2>
+            <h4>Имя: {{ user.username }}</h4>
+            <h4>Почта: {{ user.email }}</h4>
+            <h4>Баланс: {{ user.profileuser.balance }}</h4>
+            <h4>Подписка: {{ user.profileuser.podpiska.id }}</h4>
+            <h4>Название: {{ user.profileuser.podpiska }}</h4>
+            {% else %}
+            <h2>
+                <a href="{% url 'login' %}"></a>
+            </h2>
+        {% endif %}
+        <form action="" method="post">
+            {% csrf_token %}
+            {% if user.profile.popdpiska.id == 1 %}
+                <button class="button" type="submit" value="free" name="stype" disabled="disabled">Бесплатная</button>
+                {% else %}
+                <button type="submit" value="free" name="stype">Бесплатная</button>
+            {% endif %}
+             {% if user.profile.popdpiska.id == 2 %}
+                <button type="submit" value="based" name="stype" disabled="disabled">Базовая</button>
+                {% else %}
+                <button type="submit" value="based" name="stype">Базовая</button>
+            {% endif %}
+            {% if user.profile.popdpiska.id == 3 %}
+                <button type="submit" value="super" name="stype" disabled="disabled">Супер</button>
+                {% else %}
+                <button type="submit" value="super" name="stype">Супер</button>
+            {% endif %}
+        </form>
+        <form action="" method="post">
+            {% csrf_token %}
+            <label for="balanceplus">Сумма пополнения</label>
+            <input type="number" id="balanceplus" name="summa">
+            <button type="submit">Отправить</button>
+        </form>
+    </div>
+{% endblock content %}

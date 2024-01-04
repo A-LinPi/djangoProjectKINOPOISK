@@ -1,20 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+{% extends 'index.html' %}
+{% load static %}
+
+{% block head %}
     <title>Про фильм</title>
-</head>
-<body>
+    <link href="{% static 'css/style1.css' %}" rel="stylesheet">
+    <link href="{% static 'css/kino_detail.css' %}" rel="stylesheet">
+    <link href="{% static 'css/btn.css' %}" rel="stylesheet">
+{% endblock head %}
+{% block content %}
     <h2>Фильм {{ kino.title }} </h2>
-    <p>Жанр: {{ kino.genre }}</p>
-    <p>Режисер: {{ kino.director }}</p>
-    <p>Страна: {{ kino.country }}</p>
-    <p>Год: {{ kino.year }}</p>
-    <p>Актеры: </p>
-        {% for one in kino.actor.all %}
-            <p>{{ one.name }} {{ one.lastname }}</p>
+    <div class="info">
+        <img src="{{ kino.image }}">
+        <div>
+            <p>Жанр: {{ kino.genre }}</p>
+            <p>Режисер: {{ kino.director }}</p>
+            <p>Страна: {{ kino.country }}</p>
+            <p>Год: {{ kino.year }}</p>
+            <p>Актеры: </p>
+                {% for one in kino.actor.all %}
+                    <p>{{ one.name }} {{ one.lastname }}</p>
+                {% endfor %}
+            <p>Подписка: {{ kino.podpiska.level }}</p>
+            <p>Описание: {{ kino.opisanie }}</p>
+        </div>
+        {% if user.profileuser.podpiska.id %}
+            <iframe width="560" height="315" src="{{ kino.trailer }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            {% else %}
+            <h3>Купите подписку</h3>
+        {% endif %}
+    </div>
+
+
+
+    <form action="" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Отправить">
+    </form>
+        {% for one in comments %}
+            <div class="comment_date">
+                Имя: {{ one.user.username }} Дата: {{ one.timedata }}
+            </div>
+            <div>
+                Комментарий: {{ one.body }}
+            </div>
         {% endfor %}
-    <p>Подписка: {{ kino.podpiska.level }}</p>
-    <iframe width="560" height="315" src="{{ kino.trailer }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-</body>
-</html>
+{% endblock content %}

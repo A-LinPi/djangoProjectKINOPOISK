@@ -1,4 +1,10 @@
 {% extends 'index.html' %}
+{% load static %}
+{% block head %}
+    <title>Login</title>
+    <link href="{% static 'css/btn.css' %}" rel="stylesheet">
+{% endblock head %}
+
 {% block content %}
     <form action="" method="post">
         {% csrf_token %}

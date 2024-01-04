@@ -22,7 +22,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='home'),
     path('kino/all', views.kinolist.as_view(), name='allkino'),
-    path('kino/<int:pk>', views.kinodetail.as_view(), name='info'),
+    # path('kino/<int:pk>', views.kinodetail.as_view(), name='info'),
+    path('kino/<int:pk>', views.kinodetail, name='info'),
     path('director/all', views.directorlist.as_view(), name='alldirector'),
     path('director/<int:pk>', views.directordetail.as_view(), name='infodirector'),
     path('actor/all', views.actorlist.as_view(), name='allactor'),
@@ -30,5 +31,6 @@ urlpatterns = [
     path('user/', include('django.contrib.auth.urls')),
     path('accounts/profile/', views.index),
     path('user/reg/', views.reg, name="registration"),
-    path('accounts/login/', views.index)
+    path('accounts/login/', views.index),
+    path('podpiska/<int:userid>', views.topodpiska, name='podpiska'),
 ]

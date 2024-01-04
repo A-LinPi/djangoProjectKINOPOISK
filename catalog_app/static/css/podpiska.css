@@ -1,0 +1,13 @@
+.content {
+    color: white;
+    margin: 20px;
+}
+
+input[type=button], input[type=submit], input[type=reset], button {
+    background-color: #04AA6D;
+    border: none;
+    color: white;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+}

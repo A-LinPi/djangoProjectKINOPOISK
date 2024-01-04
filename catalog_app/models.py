@@ -79,3 +79,15 @@ class ProfileUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     podpiska = models.ForeignKey(Podpiska, on_delete=models.SET_NULL, null=True)
     balance = models.IntegerField(default=10)
+
+
+class Comment(models.Model):
+    # name = models.CharField(max_length=20)
+    body = models.TextField(verbose_name="Оставьте комментарий")
+    timedata = models.DateTimeField(auto_now=True)
+    active = models.BooleanField(default=False)
+    kino = models.ForeignKey(Kino, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+
+
+    

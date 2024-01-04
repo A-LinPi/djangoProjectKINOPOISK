@@ -1,0 +1,30 @@
+img {
+    width: 360px;
+    height: auto;
+    margin-right: 24px;
+}
+
+h2 {
+    color: #f4f4f4;
+}
+
+.info {
+    margin: 20px;
+    display: inline-flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    border: 1px solid #f4f4f4;
+    color: #f4f4f4;
+    font-size: 14px;
+}
+.info div {
+    width: 320px;
+}
+
+iframe {
+    margin-left: 56px;
+    width: 560px;
+    height: 315px;
+}

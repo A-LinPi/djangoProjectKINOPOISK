@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.views.generic import DetailView, ListView
 
-from catalog_app.forms import SignUp
+from catalog_app.forms import SignUp, CommentForm
 from catalog_app.models import *
 from django.views import generic
 
@@ -18,6 +18,7 @@ def index(request):
 
 class kinolist(generic.ListView):
     model = Kino
+    paginate_by = 4
 
 
 class kinodetail(generic.DetailView):
@@ -26,10 +27,41 @@ class kinodetail(generic.DetailView):
 
 class directorlist(generic.ListView):
     model = Director
+    paginate_by = 4
 
 
 class directordetail(generic.DetailView):
     model = Director
+
+
+def proverka(newcom):
+    blacklist = ['жопа']
+    spisok = newcom.body.split()
+    active = True
+    for one in spisok:
+        if one in blacklist:
+            newcom.delete()
+            active = False
+
+    if active:
+        newcom.active = True
+        newcom.save()
+        # breakpoint()
+
+
+def kinodetail(request, pk):
+    film = Kino.objects.get(id=pk)
+    comments = film.comment_set.filter(active=True)
+    forma = CommentForm()
+    if request.POST:
+        newcom = Comment()
+        newcom.body = request.POST.get('body')
+        newcom.kino = film
+        newcom.user = request.user
+        newcom.save()
+        proverka(newcom)
+    data = {'kino': film, 'form': forma, 'comments': comments}
+    return render(request, 'catalog_app/kino_detail.html', data)
 
 
 def reg(request):
@@ -49,7 +81,7 @@ def reg(request):
             newuser.first_name = K4
             newuser.last_name = K5
             newuser.save()
-            ProfileUser.objects.create(user_id=newuser, podpiska_id=1)
+            ProfileUser.objects.create(user_id=newuser.id, podpiska_id=1)
             login(request, newuser)
             return redirect('home')
     else:
@@ -61,7 +93,36 @@ def reg(request):
 
 class actorlist(generic.ListView):
     model = Actor
+    paginate_by = 4
 
 
 class actordetail(generic.DetailView):
     model = Actor
+
+
+def topodpiska(request, userid):
+    data = {}
+    if request.POST:
+        print(userid)
+        print('ok1')
+        if request.POST.get('stype'):
+            stype = request.POST.get('stype')
+            print(stype)
+            user = User.objects.get(id=userid)
+            newpodp = Podpiska.objects.get(level=stype)
+            if stype == 'free':
+                user.profileuser.podpiska = newpodp
+            elif stype == 'based' and user.profileuser.balance >= 1:
+                user.profileuser.balance -= 1
+                user.profileuser.podpiska = newpodp
+            elif stype == 'super' and user.profileuser.balance >= 5:
+                user.profileuser.balance -= 5
+                user.profileuser.podpiska = newpodp
+                user.profileuser.save()
+        elif request.POST.get('summa'):
+            summa = request.POST.get('summa')
+            print(summa)
+            user = User.objects.get(id=userid)
+            user.profileuser.balance += int(summa)
+            user.profileuser.save()
+    return render(request, 'catalog_app/podpiska.html', data)

@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from .models import *
 
 
 class SignUp(UserCreationForm):
@@ -21,3 +22,9 @@ class SignUp(UserCreationForm):
                              )
     first_name = forms.CharField(label='имя', max_length=20, required=False)
     last_name = forms.CharField(label='фамилия', max_length=20, required=False)
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['body']

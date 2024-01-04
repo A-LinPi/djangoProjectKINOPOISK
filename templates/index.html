@@ -1,15 +1,13 @@
+{#{% extends 'index.html' %}#}
 {% load static %}
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    {% block head %}
+{% block head %}
     <title>Title</title>
     <link href="{% static 'css/main.css' %}" rel="stylesheet">
-    {% endblock head %}
+    <link href="{% static 'css/btn.css' %}" rel="stylesheet">
+    <link href="{% static 'css/podpiska.css' %}" rel="stylesheet">
+{% endblock head %}
 <body class="main-page-body">
-    {% block header %}
+{% block header %}
     <header class="header">
         <h1 class="logo"><span>КИНО</span>БАЗА</h1>
         <ul class="main-nav">
@@ -17,23 +15,26 @@
             <li><a href="{% url 'allactor' %}">Актеры</a></li>
             <li><a href="{% url 'alldirector' %}">Режиссеры</a></li>
             <li><a href="{% url 'allkino' %}">Фильмы</a></li>
-            <li><a href="">Подписка</a></li>
-            {% if not user.username %}
-                <a href="{% url 'login' %}">LOGIN</a>
-            {% else %}
-                <a href="{% url 'logout' %}">LOGOUT</a>
-            {% endif %}
+                {% if user.username %}
+                    <a href="{% url 'podpiska' user.id %}">Подписка</a>
+                    {% else %}
+                    <a href="{% url 'podpiska' 0 %}">Подписка</a>
+                {% endif %}
+                {% if not user.username %}
+                    <a href="{% url 'login' %}">LOGIN</a>
+                    {% else %}
+                    <a href="{% url 'logout' %}?next={% url 'home' %}">LOGOUT</a>
+                {% endif %}
+
         </ul>
     </header>
     {% endblock header %}
-    {% block content %}
-        <div class="cont">
-            <div>
+{% block content %}
+<div class="cont">
+<div>
                 <h2>Добро пожаловать на сайт!</h2>
                 <h3>На сайте {{ k1 }} фильмов</h3>
                 <h3>На сайте {{ K2 }} бесплатных фильмов</h3>
             </div>
         </div>
-    {% endblock content %}
-</body>
-</html>
+{% endblock content %}

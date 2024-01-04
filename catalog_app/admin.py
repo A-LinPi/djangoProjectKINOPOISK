@@ -6,6 +6,11 @@ admin.site.register(Genre)
 admin.site.register(Country)
 
 
+@admin.register(Comment)
+class adminComment(admin.ModelAdmin):
+    list_display = ('user', 'timedata', 'kino', 'active')
+
+
 @admin.register(ProfileUser)
 class adminProfileUser(admin.ModelAdmin):
     list_display = ('user', 'podpiska')
